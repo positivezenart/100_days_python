@@ -1,3 +1,4 @@
+print("welcome to roller coster")
 height = int(input("Please enter the height in centi meters \n"))
 
 if height > 120:
