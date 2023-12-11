@@ -9,23 +9,11 @@ def random_card(cards):
     cards_number = random.choice(cards)
     return cards_number
 
-computer_cards =[]
-player_cards =[]
-
-for i in range(0, 2):
-    computer_cards.append(random_card(cards))
-    player_cards.append(random_card(cards))
-
-print(f"Player cards are{player_cards},computer cards are {computer_cards}")
 def sum_cards(player_cards,computer_cards):
     user_sum = sum(player_cards)
     computer_sum = sum(computer_cards)
     return user_sum, computer_sum
 
-user_sum, computer_sum = sum_cards(player_cards,computer_cards)
-
-print(f"user sum are {user_sum}, computer sum are {computer_sum}")
-    
 def calculate_score(player_cards,computer_cards,user_sum, computer_sum):
     if 11 in computer_cards:
         if computer_sum >= 21:
@@ -46,18 +34,27 @@ def calculate_score(player_cards,computer_cards,user_sum, computer_sum):
         print(player_cards)
         draw_another_card = input(" do you want to draw another card?(yes/no)")
         return draw_another_card
+
+computer_cards =[]
+player_cards =[]
+for i in range(0, 2):
+    computer_cards.append(random_card(cards))
+    player_cards.append(random_card(cards))
+print(f"Player cards are{player_cards},computer cards are {computer_cards}")
+
+
+user_sum, computer_sum = sum_cards(player_cards,computer_cards)
+print(f"user sum are {user_sum}, computer sum are {computer_sum}")
+
     
 is_condition = True
 while is_condition:
     output  = calculate_score(player_cards,computer_cards,user_sum, computer_sum)
-    if output == 0:
-       print("Computer lose")
+    if output == 0 or output == 1:
+       print("you win!")
        is_condition = False
     elif output == 2:
        print("you lose")
-       is_condition = False
-    elif output == 1:
-       print("you win")
        is_condition = False
     elif output == 'yes':
         player_cards.append(random_card(cards))
