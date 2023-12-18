@@ -1,0 +1,10 @@
+OOP is basically like a restaurant, where there are different roles to run the restarant smoothly handled by manager. here also we will have different
+fucntion whicha are handled by managers
+Class is basically a waiter
+Henry and betty are objects
+
+Object can contain attributes(variables) and methos(function, ), it represent what waiter has, what it does
+
+car = CarBlueprint(), Here car is an object, it get created when we call the class CarBlueprint()
+
+py -m pip install numpy
