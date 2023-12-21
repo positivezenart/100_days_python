@@ -17,16 +17,16 @@ class ScoreBoard(Turtle):
         self.update_scoreboard()
         
 
-    def update_scoreboard(self):
+    def update_scoreboard(self): #disply scoreson board
         self.write(f"score = {self.score}",align=ALIGNMENT,font=FONT)
        
     
-    def increaseScore(self):
+    def increaseScore(self): #update the score and clear it everytime
         self.score += 1
         self.clear()
         self.update_scoreboard()
-    
-    def Gameover(self):
+     
+    def Gameover(self): #to disaply game over message
         self.goto(0,0)
         self.write(f"Game over",align="center",font=FONT)
         

@@ -12,7 +12,7 @@ class Food(Turtle):
         self.refresh()
 
     
-    def refresh(self):
+    def refresh(self): #display food everythime in different place when its refreshed
         randx = random.randint(-280,280)
         randy = random.randint(-280,280)
         self.goto(randx,randy)
