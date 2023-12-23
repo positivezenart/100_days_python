@@ -1,4 +1,5 @@
 def is_leap(year):
+  """Calculates leap year"""  
   if year % 4 == 0:
     if year % 100 == 0:
       if year % 400 == 0:
@@ -10,8 +11,9 @@ def is_leap(year):
   else:
     return False
   
-# TODO: Add more code here 👇
+
 def days_in_month(year, month):
+  """ Number of days in a month"""
   month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   is_leap_year = is_leap(year)
   if is_leap_year:

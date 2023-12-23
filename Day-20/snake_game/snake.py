@@ -15,7 +15,7 @@ class Snake:
         self.snake_creation()
         self.head = self.seg_ments[0]
     
-    def screen_create(self):
+    def screen_create(self): #creating a screen
         screen = Screen()
         screen.setup(width = 600, height = 600)
         screen.bgcolor("black")
@@ -23,11 +23,11 @@ class Snake:
         screen.tracer(0)   
     
     def snake_creation(self):
-        for position in STARTING_POSITION:
+        for position in STARTING_POSITION: #create the first turtles based on default position
             self.add_segment(position)
 
     
-    def add_segment(self,position):
+    def add_segment(self,position): #to create a turtle
             t1 = Turtle(shape='square')
             t1.pensize(2)
             t1.color("white")
@@ -35,8 +35,15 @@ class Snake:
             t1.goto(position)
             self.seg_ments.append(t1)
     
+    def reset(self):
+        for seg in self.seg_ments:
+            seg.goto(1000,1000)
+        self.seg_ments.clear()
+        self.snake_creation()
+        self.head = self.seg_ments[0]
+    
     def extend(self):
-        self.add_segment(self.seg_ments[-1].position())
+        self.add_segment(self.seg_ments[-1].position()) #to extend the tail with the position of last turtle
     
     def move(self):
         for seg_num in range(len(self.seg_ments)-1,0,-1): #start #stop #step
