@@ -35,6 +35,13 @@ class Snake:
             t1.goto(position)
             self.seg_ments.append(t1)
     
+    def reset(self):
+        for seg in self.seg_ments:
+            seg.goto(1000,1000)
+        self.seg_ments.clear()
+        self.snake_creation()
+        self.head = self.seg_ments[0]
+    
     def extend(self):
         self.add_segment(self.seg_ments[-1].position()) #to extend the tail with the position of last turtle
     
