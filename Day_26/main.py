@@ -27,6 +27,9 @@ while total_guessed_state < 50:
     answer_state = screen.textinput(title=f"{len(guesed_state_list)}/50 Guessed states", prompt ="what is the state name?")
     guessed_state = convert_to_title_case(answer_state)
     if guessed_state == "Exit":
+       remaining_states =[state for state in all_states if state not in guesed_state_list]
+       df_remaining_states = pd.DataFrame(remaining_states,columns=["state"])
+       df_remaining_states.to_csv(r'D:\Downloads\100_days_python\Day_26\remainingstates.csv')
        break
     if guessed_state in all_states:
         if guessed_state not in guesed_state_list:
@@ -40,11 +43,4 @@ while total_guessed_state < 50:
     else:
         t.hideturtle()
 
-remaining_states =[]
-for i in all_states:
-   if i not in guesed_state_list:
-      remaining_states.append(i)
-
-df_remaining_states = pd.DataFrame(remaining_states,columns=["state"])
-df_remaining_states.to_csv(r'D:\Downloads\100_days_python\Day_26\remainingstates.csv')
      
