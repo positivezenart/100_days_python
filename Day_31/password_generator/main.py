@@ -25,31 +25,59 @@ def collect_information():
     
     #messagebox.showinfo(title="Message",message="Are you sure you want to add this information")
     if len(website_entry) > 0 and len(email_entry) > 0 and len(password_entry) >=10:
-        dictionary ={"website":website_entry,"email":email_entry,"password":password_entry}
+        dictionary ={
+            website_entry:
+                {"email":email_entry,
+                 "password":password_entry
+                 }
+                }
         is_ok =messagebox.askokcancel(title=website_entry,message=f"These are the details saves \n {dictionary} \n Do you want to save it?")
         if is_ok == True:
-            with open("Day_30/password_file.txt", "a") as f:
-                f.write(str(dictionary) + '\n')
-            website_input.delete(0,END)
-            password_input.delete(0,END)
-            user_input.delete(0,END)
+            try:
+                with open("Day_31/password_generator/data.json","r") as data_file:
+                     #reading old data
+                     data=json.load(data_file)
+            except FileNotFoundError:
+                with open("Day_31/password_generator/data.json","w") as data_file:
+                     json.dump(dictionary, data_file)
+            else:
+                with open("Day_31/password_generator/data.json", "w") as data_file:
+                     data.update(dictionary)
+                     json.dump(data, data_file,indent=4)
+            finally:                                 
+                website_input.delete(0,END)
+                password_input.delete(0,END)
+                user_input.delete(0,END)
             messagebox.showinfo(title="Message",message=f"{website_entry} website information added to datastore ")
-
+            
+#..........................SEARCH PASSWORD........................#
+def search_password():
+    website_entry  = website_input.get()
+    try:
+        with open("Day_31/password_generator/data.json","r") as data_file:
+            data=json.load(data_file)
+            messagebox.showinfo(title="Info",message=f"Credentials for {website_entry} is {data[website_entry]}")
+    except KeyError:
+            messagebox.showinfo(title="Info",message=f"Credentials for {website_entry} is not available in the Data storage")
 # ---------------------------- UI SETUP ------------------------------- #
 window =Tk()
 window.title("Password Manager")
 window.minsize(width=400,height=400)
 window.config(padx=50,pady=50)
 canvas=Canvas(width=200,height=200)
-image_pass =PhotoImage(file="Day_30\\logo.png")
+image_pass =PhotoImage(file="Day_31\password_generator\logo.png")
 canvas.create_image(100,100,image=image_pass)
 canvas.grid(column =2,row=1)
 
 website_label=Label(text="Website:")
 website_label.grid(column=1,row=2)
 website_input =Entry(width=35)
-website_input.grid(column=2,row=2,columnspan=3)
+website_input.grid(column=2,row=2,columnspan=2)
 website_input.focus()
+
+search_button = Button(text="Search",command=search_password)
+search_button.grid(column=3,row=2)
+search_button.config(bg="blue", fg="white",width = "10", font=("Arial", 8),borderwidth = '2')
 
 user_label=Label(text="Email/Username:")
 user_label.grid(column=1,row=3)
@@ -59,8 +87,8 @@ user_input.insert(0, 'yourname@gmail.com')
 
 password_label=Label(text="Password:")
 password_label.grid(column=1,row=4)
-password_input =Entry(width=21)
-password_input.grid(column=2,row=4)
+password_input =Entry(width=35)
+password_input.grid(column=2,row=4,columnspan=2)
 #password_input.insert(0,"********")
 
 password_button = Button(text="Generate password",command=password_generator)
